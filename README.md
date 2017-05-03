@@ -1,6 +1,8 @@
 # Raspi2GarageOpenerVideo
 Raspberry Pi Garage Door Opener With Streaming Video of Door Status
 
+Also found at https://www.instructables.com/id/Raspberry-Pi-Garage-Door-Opener-with-streaming-vid/
+
 Best viewed in RAW.  Somehow it only formats properly in RAW.
 
 I have borrowed from @ https://www.instructables.com/id/Raspberry-Pi-Garage-Door-Opener
@@ -362,3 +364,49 @@ esac
 
 exit 0
 -----------------------------------------------------------------------------------------------------
+https://github.com/paulpoco/Raspi2GarageOpenerVideo/blob/master/etc/init.d/cam_motion
+
+crtl o to save
+crtl x to exit
+
+Make it executable
+
+$ sudo chmod 777 /etc/init.d/cam_motion 
+
+Make it start at boot
+
+$ sudo update-rc.d -f cam_motion start 4 
+
+Reboot
+
+====================================================================================================
+Step 10>>>>   Bring Up on Web Browser Once You Setup Your Router Port Forwarding
+
+Got one of those SmartPi cases for Pi and Camera that has Lego as a cover. Attached relay board to back of case with zap straps.
+
+I put the magnetic switch at the top of the garage door and used some cat5 cable I had to bring it back to the Pi. Cut some jumpers in have and soldered to the cat5 one pair. Wrapped the extra pairs back.
+
+Found really simple fix for Away and Home.
+
+Setup the index.php that does the buttons and video etc to be for home like
+
+Then make a copy of index.php to away.php still in the /var/www/ folder.
+
+Edit away.php to be like
+
+In your router:
+Port Forward Wan port xxxx1 to Lan 80 of RaspiIP
+Port Forward Wan port xxxx2 to Lan 8081 of RaspiIP
+
+Now in your Browser at home or your cellphone:
+At home use http://RaspiIP this will default to port 80 and index.php
+When Away use http://YourDdnsAddress:xxxx1/away.php
+
+=============================================================================================================
+Step 11>>>>   Final Result: Garage Control/monitor
+
+I soldered a pair of wires across the back of the circuit board of a RF Garage opener. Put wires behind the bigger button as there already was a slot in the plastic. Putting the relay directly to the 2 wires between wall and ceiling unit just caused the wall unit to reset. Now the relay is the same as putting the visor remote.
+
+=============================================================================================================
+Also found at https://www.instructables.com/id/Raspberry-Pi-Garage-Door-Opener-with-streaming-vid/
+
