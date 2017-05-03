@@ -10,7 +10,7 @@ Magnetic reed switch
 wire for Mag Sensor
 jumpers
 
-======================================================================================================
+===============================================================================================
 Step 1>>>
 You need do this Instructable @ https://www.instructables.com/id/Raspberry-Pi-Garage-Door-Opener
 
@@ -27,12 +27,12 @@ Turn on
 If not wired then you need to get Wifi working so I recommend doing wired then get WiFi working
 once you can SSH in, otherwise you would have to drag a Monitor,mouse,keyboard out and hook it up.
 
-=======================================================================================================
+===============================================================================================
 Step 2>>>
 Get Wifi working if needed.   @ https://www.instructables.com/id/Raspberry-Pi-Garage-Door-Opener
 
 
-=======================================================================================================
+================================================================================================
 Step 3>>>   Before step 3
 
 ssh to your pi
@@ -110,6 +110,19 @@ Once this is done, you will have a working webserver! To verify that, just type 
 
 $ ssh pi@[YOUR PI'S IP ADDRESS]
 $ sudo chown -R pi:root /var/www
+
+Any OS
+Download files from Github and place files and folders in /var/www of the Raspi 
+Download Filezilla. Using Putty or another ssh terminal:
+$ ssh pi@[YOUR PI'S IP ADDRESS]
+$ sudo chown -R pi:root /var/www
+
+Start filezilla. Log into the raspberry pi with these credentials:
+Host: sftp://[YOUR PI'S IP ADDRESS]
+Username: pi
+Password: xxxxxxxx
+Copy using Filezilla to place the files in /var/www of the Raspi
+Edit index.php and away.php as needed
 
 
 
