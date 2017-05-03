@@ -5,7 +5,7 @@
                 usleep(1000000);
                 exec('gpio write 0 1'); // Output GPIO 0 as 1  replace with what you use
         }
-exec ( "gpio read 2", $status ); // Read GPIO 2   replace with what you use
+exec ( "gpio read 2", $status ); // Read GPIO 2 connected to mag reed switch  replace with what you use
 
 if ( $status[0] == 0 ) {
 ?>
