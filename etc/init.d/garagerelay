@@ -1,0 +1,26 @@
+#! /bin/bash
+# /etc/init.d/garagerelay
+
+
+# Carry out specific functions when asked to by the system
+case "$1" in
+start)
+echo "Starting Relay"
+# Turn 0 on which keeps relay off
+/usr/local/bin/gpio write 0 1
+#Start Gpio 0 or 17 in BCM out mode
+/usr/local/bin/gpio mode 0 out
+#Start Gpio 2 or 27 in BCM in mode with pull up
+/usr/local/bin/gpio mode 2 in
+/usr/local/bin/gpio mode 2 up
+;;
+stop)
+echo "Stopping gpio"
+;;
+*)
+echo "Usage: /etc/init.d/garagerelay {start|stop}"
+exit 1
+;;
+esac
+
+exit 0
