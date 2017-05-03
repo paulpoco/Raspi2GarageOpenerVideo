@@ -1,6 +1,8 @@
 # Raspi2GarageOpenerVideo
 Raspberry Pi Garage Door Opener With Streaming Video of Door Status
 
+Best viewed in RAW.  Somehow it only formats properly in RAW.
+
 I have borrowed from @ https://www.instructables.com/id/Raspberry-Pi-Garage-Door-Opener
 updated or changed the process
 
@@ -333,3 +335,30 @@ $ sudo service apache2 restart
 The directory you specified should now be password protected.
 
 ====================================================================================================
+Step 9>>>>    Make Motion Start at Boot
+
+$ sudo nano /etc/init.d/cam_motion
+
+Then paste the blob below:
+------------------------------------------------------------------------------------------------------
+# /etc/init.d/cam_motion
+
+
+# Carry out specific functions when asked to by the system
+case "$1" in
+start)
+echo "Starting Camera Motion"
+nohup /home/pi/mmal/motion -n -c /home/pi/mmal/motion-mmalcam-both.conf 1>/dev/null 2>&1 ;;
+
+stop)
+echo "Stopping Camera Motion"
+killall motion
+;;
+*)
+echo "Usage: /etc/init.d/cam_motion {start|stop}"
+exit 1
+;;
+esac
+
+exit 0
+-----------------------------------------------------------------------------------------------------
