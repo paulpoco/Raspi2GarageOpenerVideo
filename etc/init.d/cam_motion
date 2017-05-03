@@ -1,0 +1,20 @@
+# /etc/init.d/cam_motion
+
+
+# Carry out specific functions when asked to by the system
+case "$1" in
+start)
+echo "Starting Camera Motion"
+nohup /home/pi/mmal/motion -n -c /home/pi/mmal/motion-mmalcam-both.conf 1>/dev/null 2>&1 ;;
+
+stop)
+echo "Stopping Camera Motion"
+killall motion
+;;
+*)
+echo "Usage: /etc/init.d/cam_motion {start|stop}"
+exit 1
+;;
+esac
+
+exit 0
