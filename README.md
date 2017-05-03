@@ -37,7 +37,7 @@ Step 2>>>   Get Wifi working if needed.
 Step 3>>>   Install Software
 
 ssh to your pi
-pi@GaragePi2:~ $ sudo raspi-config
+$ sudo raspi-config
 #1 change the password from default
 #2 change hostname
 #3 Boot options
@@ -53,9 +53,9 @@ pi@GaragePi2:~ $ sudo raspi-config
   Reboot
 
 Update Raspbian and its packages
-pi@GaragePi2:~ $ sudo apt-get update
-pi@GaragePi2:~ $ sudo apt-get upgrade
-pi@GaragePi2:~ $ sudo reboot
+$ sudo apt-get update
+$ sudo apt-get upgrade
+$ sudo reboot
 
 Info @ http://wiringpi.com/download-and-install/
 
@@ -63,48 +63,48 @@ To install…
 
 First check that wiringPi is not already installed. In a terminal, run:
 
-pi@GaragePi2:~ $ gpio -v
+$ gpio -v
 If you get something, then you have it already installed. The next step is to work out if it’s installed via a standard package or from source. If you installed it from source, then you know what you’re doing – carry on – but if it’s installed as a package, you will need to remove the package first. To do this:
 
-pi@GaragePi2:~ $ sudo apt-get purge wiringpi
-pi@GaragePi2:~ $ hash -r
+$ sudo apt-get purge wiringpi
+$ hash -r
 Then carry on.
 
 If you do not have GIT installed, then under any of the Debian releases (e.g. Raspbian), you can install it with:
 
-pi@GaragePi2:~ $ sudo apt-get install git-core
+$ sudo apt-get install git-core
 If you get any errors here, make sure your Pi is up to date with the latest versions of Raspbian: (this is a good idea to do regularly, anyway)
 
-pi@GaragePi2:~ $ sudo apt-get update
-pi@GaragePi2:~ $ sudo apt-get upgrade
+$ sudo apt-get update
+$ sudo apt-get upgrade
 To obtain WiringPi using GIT:
 
-pi@GaragePi2:~ $ cd
-pi@GaragePi2:~ $ git clone git://git.drogon.net/wiringPi
+$ cd
+$ git clone git://git.drogon.net/wiringPi
 If you have already used the clone operation for the first time, then
 
-pi@GaragePi2:~ $ cd ~/wiringPi
-pi@GaragePi2:~ $ git pull origin
+$ cd ~/wiringPi
+$ git pull origin
 Will fetch an updated version then you can re-run the build script below.
 
 To build/install there is a new simplified script:
 
-pi@GaragePi2:~ $ cd ~/wiringPi
-pi@GaragePi2:~ $ ./build
+$ cd ~/wiringPi
+$ ./build
 The new build script will compile and install it all for you – it does use the sudo command at one point, so you may wish to inspect the script before running it.
 
 Test wiringPi’s installation
 
 run the gpio command to check the installation:
 
-pi@GaragePi2:~ $ gpio -v
-pi@GaragePi2:~ $ gpio readall
+$ gpio -v
+$ gpio readall
 That should give you some confidence that it’s working OK.
 
 Once Wiring Pi is installed, you will want to install Apache and PHP via these commands:
 
-pi@GaragePi2:~ $ sudo apt-get update
-pi@GaragePi2:~ $ sudo apt-get install apache2 php5 libapache2-mod-php5
+$ sudo apt-get update
+$ sudo apt-get install apache2 php5 libapache2-mod-php5
 
 Once this is done, you will have a working webserver! To verify that, just type in your pi's ip adress in a browser. You should see Apache's default website which says "It Works!".
 
@@ -115,12 +115,12 @@ Any OS
 Download files from Github https://github.com/paulpoco/Raspi2GarageOpenerVideo/tree/master/var/www   
 Download Filezilla. Using Putty or another ssh terminal:
 
-pi@GaragePi2:~ $ ssh pi@[YOUR PI'S IP ADDRESS]
-pi@GaragePi2:~ $ sudo chown -R pi:root /var/www
-pi@GaragePi2:~ $ sudo cd /var/www/html
-pi@GaragePi2:~ $ sudo rm index.html
-pi@GaragePi2:~ $ sudo cd ..
-pi@GaragePi2:~ $ sudo rmdir html  
+  ssh pi@[YOUR PI'S IP ADDRESS]
+$ sudo chown -R pi:root /var/www
+$ sudo cd /var/www/html
+$ sudo rm index.html
+$ sudo cd ..
+$ sudo rmdir html  
 After this step the webpage will not work until a later step.
 
 Start filezilla from non Raspi. Log into the raspberry pi with these credentials:
@@ -162,7 +162,7 @@ GPIO mode 2 in and then set up pullup.
 
 To make this initialization run at boot, I created a start-up script.
 
-pi@GaragePi2:~ $ sudo nano /etc/init.d/garagerelay
+$ sudo nano /etc/init.d/garagerelay
 
 Then paste this script:
 --------------------------------------------------------------------------------------------------
@@ -196,10 +196,10 @@ exit 0
 https://github.com/paulpoco/Raspi2GarageOpenerVideo/blob/master/etc/init.d/garagerelay
 
 Make the file executable:
-pi@GaragePi2:~ $ sudo chmod 777 /etc/init.d/garagerelay
+$ sudo chmod 777 /etc/init.d/garagerelay
 
 Now tell your pi to run this script at boot:
-pi@GaragePi2:~ $ sudo update-rc.d -f garagerelay start 4
+$ sudo update-rc.d -f garagerelay start 4
 (Note: You can safely ignore the "missing LSB tags" warning.)
 
 =====================================================================================================
@@ -209,24 +209,24 @@ Ok here is the proper way to get the camera working:
 
 Install motion to get dependecies.
 
-pi@GaragePi2:~ $ sudo apt-get install motion
-pi@GaragePi2:~ $ sudo apt-get install libjpeg62
+$ sudo apt-get install motion
+$ sudo apt-get install libjpeg62
 
 Create a directory in your home called mmal
 
-pi@GaragePi2:~ $ cd ~/
-pi@GaragePi2:~ $ mkdir mmal
-pi@GaragePi2:~ $ cd mmal
+$ cd ~/
+$ mkdir mmal
+$ cd mmal
 
 Download @maya fork of dozencrow’s motion program that works with Rasbian Jessie
 
-pi@GaragePi2:~ $ wget https://www.dropbox.com/s/6ruqgv1h65zufr6/motion-mmal-lowflyerUK-20151114.tar.gz
+$ wget https://www.dropbox.com/s/6ruqgv1h65zufr6/motion-mmal-lowflyerUK-20151114.tar.gz
 
-pi@GaragePi2:~ $ sudo apt-get install -y libjpeg-dev libavformat56 libavformat-dev libavcodec56 libavcodec-dev libavutil54 libavutil-dev libc6-dev zlib1g-dev libmysqlclient18 libmysqlclient-dev libpq5 libpq-dev
+$ sudo apt-get install -y libjpeg-dev libavformat56 libavformat-dev libavcodec56 libavcodec-dev libavutil54 libavutil-dev libc6-dev zlib1g-dev libmysqlclient18 libmysqlclient-dev libpq5 libpq-dev
 
-pi@GaragePi2:~ $ tar -zxvf motion-mmal-lowflyerUK-20151114.tar.gz
+$ tar -zxvf motion-mmal-lowflyerUK-20151114.tar.gz
 
-pi@GaragePi2:~ $ ./motion -c motion-mmalcam-both.conf
+$ ./motion -c motion-mmalcam-both.conf
 
 It should work now when you goto RaspiIP:8081
 
@@ -234,7 +234,7 @@ CTRL-C to quit
 
 Edit the config file and make changes
 
-pi@GaragePi2:~ $ nano motion-mmalcam-both.conf
+$ nano motion-mmalcam-both.conf
 
 target_dir /home/pi/mmal/m-video
 output_pictures off
@@ -245,7 +245,7 @@ Step 8>>>>   Make Your Webpage More Secure
 
 In order to create the file that will store the passwords needed to access our restricted content, we will use a utility called htpasswd. This is found in the apache2-utils package. This was installed in Step 1.
 
-pi@GaragePi2:~ $ sudo htpasswd -c /etc/apache2/.htpasswd pi
+$ sudo htpasswd -c /etc/apache2/.htpasswd pi
 
 (You will be asked to supply and confirm a password for the user)
 
@@ -255,14 +255,14 @@ Adding password for user pi
 
 If we view the contents of the file, we can see the username and the encrypted password for each record:
 
-pi@GaragePi2:~ $ cat /etc/apache2/.htpasswd
+$ cat /etc/apache2/.htpasswd
 
 pi:$xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/
 
 Configuring Access Control within the Virtual Host Definition
 Begin by opening up the virtual host file that you wish to add a restriction to. For our example, we'll be using the 000-default.conf file that holds the default virtual host installed through Raspbian's apache package:
 
-pi@GaragePi2:~ $ sudo nano /etc/apache2/sites-enabled/000-default.conf
+$ sudo nano /etc/apache2/sites-enabled/000-default.conf
 
 Inside, with the comments stripped, the file should look similar to this:
 
@@ -278,9 +278,11 @@ Inside, with the comments stripped, the file should look similar to this:
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-We will change the directory from /var/www/html to /var/www.
+We will change the directory from /var/www/html to /var/www and add the directory section to make the site password protected.  Will at a later date make it https.
 
 Authentication is done on a per-directory basis. To set up authentication, you will need to target the directory you wish to restrict with a block. In our example, we'll restrict the entire document root, but you can modify this listing to only target a specific directory within the web space. Within this directory block, specify that we wish to set up Basic authentication. For the AuthName, choose a realm name that will be displayed to the user when prompting for credentials. Use the AuthUserFile directive to point Apache to the password file we created. Finally, we will require a valid-user to access this resource, which means anyone who can verify their identity with a password will be allowed in:
+
+https://github.com/paulpoco/Raspi2GarageOpenerVideo/blob/master/etc/apache2/sites-enabled/000-default.conf
 
 <VirtualHost *:80>
         # The ServerName directive sets the request scheme, hostname and port that
@@ -326,7 +328,7 @@ Crtl x
 
 Save and close the file when you are finished. Restart Apache to implement your password policy:
 
-pi@GaragePi2:~ $ sudo service apache2 restart
+$ sudo service apache2 restart
 
 The directory you specified should now be password protected.
 
