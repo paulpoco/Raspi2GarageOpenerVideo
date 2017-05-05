@@ -113,7 +113,8 @@ $ sudo apt-get install apache2 php5 libapache2-mod-php5
 Once this is done, you will have a working webserver! To verify that, just type in your pi's ip adress in a browser. You should see Apache's default website which says "It Works!".
 
 ===============================================================================================================\
-Step 4>>>>   Upload the Garage Opener Website
+Step 4>>>>   Upload the Garage Opener Website 
+(the indicators at the top of the page send gpio changes to webpage without refresh)
 
 Any OS
 Download files from Github https://github.com/paulpoco/Raspi2GarageOpenerVideo/tree/master/var/www   
@@ -132,7 +133,8 @@ Host: sftp://[YOUR PI'S IP ADDRESS]
 Username: pi
 Password: xxxxxxxx
 Copy using Filezilla file in /var/www and /var/www/css and /var/www/js to place the files in /var/www as the root folder for the webserver on Raspi
-Edit index.php and away.php as needed
+Edit index.php, away.php, send_door_status.php, send_door_status_away.php as needed
+
 
 Some Technical Notes (for those interested):
 The website uses jQuery to post to itself (via AJAX) when a user clicks on the big button.  Quartarian did this so that if you refresh the page it doesn't trigger your garage to open.
@@ -150,9 +152,9 @@ RF Garage Door soldered accross button <===============> [Relay1] <===> Normally
                                                          [Relay] VCC <-----------> DCPower 5V[Raspi2] pin 02
                                                          [MagSW] <--------> GPIO27(GPIO_GEN2)[Raspi2] pin 13 in
                                                          [MagSW] <-------------------> Ground[Raspi2] pin 14
-                                                  Future [ PIR ] 5V <------------> DCPower 5V[Raspi2] pin 04
-                                                  Future [ PIR ] GND <---------------> Ground[Raspi2] pin 20
-                                                  Future [ PIR ] Out <----> GPIO22(GPIO_GEN3)[Raspi2] pin 15 
+                                                         [ PIR ] 5V <------------> DCPower 5V[Raspi2] pin 04
+                                                         [ PIR ] GND <---------------> Ground[Raspi2] pin 20
+                                                         [ PIR ] Out <----> GPIO22(GPIO_GEN3)[Raspi2] pin 15 
                                                   
 ===================================================================================================================
 Step 6>>>>    Create a Startup Service
@@ -388,10 +390,6 @@ I put the magnetic switch at the top of the garage door and used some cat5 cable
 
 Found really simple fix for Away and Home.
 
-Setup the index.php that does the buttons and video etc to be for home like
-
-Then make a copy of index.php to away.php still in the /var/www/ folder.
-
 Edit away.php to be like
 
 In your router:
@@ -403,7 +401,11 @@ At home use http://RaspiIP this will default to port 80 and index.php
 When Away use http://YourDdnsAddress:xxxx1/away.php
 
 =============================================================================================================
-Step 11>>>>   Final Result: Garage Control/monitor
+Step 11>>>>   Add the PIR Python Programs at /home/pi/PirFrontDoor/
+
+
+=============================================================================================================
+Step 12>>>>   Final Result: Garage Control/monitor
 
 I soldered a pair of wires across the back of the circuit board of a RF Garage opener. Put wires behind the bigger button as there already was a slot in the plastic. Putting the relay directly to the 2 wires between wall and ceiling unit just caused the wall unit to reset. Now the relay is the same as putting the visor remote.
 
