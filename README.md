@@ -401,8 +401,20 @@ At home use http://RaspiIP this will default to port 80 and index.php
 When Away use http://YourDdnsAddress:xxxx1/away.php
 
 =============================================================================================================
-Step 11>>>>   Add the PIR Python Programs at /home/pi/PirFrontDoor/
+Step 11>>>>   Add the PIR
 
+$ cd ~/
+$ mkdir PirFrontDoor
+$ cd PirFrontDoor
+Python & sh Programs to /home/pi/PirFrontDoor/
+from https://github.com/paulpoco/Raspi2GarageOpenerVideo/tree/master/home/pi/PirFrontDoor
+$ sudo apt-get install python-pip
+$ chmod +x frontdoor.py
+$ chmod 755 launcher.sh
+$ mkdir logs
+$ sudo crontab -e
+# m h  dom mon dow   command
+@reboot sh /home/pi/PirFrontDoor/launcher.sh >/home/pi/PirFrontDoor/logs/cronlog 2>&1
 
 =============================================================================================================
 Step 12>>>>   Final Result: Garage Control/monitor
