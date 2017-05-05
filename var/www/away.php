@@ -1,9 +1,9 @@
 <?php
         if(isset($_GET['trigger']) && $_GET['trigger'] == 1) {
                 error_reporting(E_ALL);
-                exec('gpio write 0 0');
+                exec('gpio write 0 0'); // Output GPIO 0 as 0  replace with what you use
                 usleep(1000000);
-                exec('gpio write 0 1');
+                exec('gpio write 0 1'); // Output GPIO 0 as 1  replace with what you use
         }
 ?>
 <html>
