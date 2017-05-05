@@ -408,6 +408,8 @@ $ mkdir PirFrontDoor
 $ cd PirFrontDoor
 Python & sh Programs to /home/pi/PirFrontDoor/
 from https://github.com/paulpoco/Raspi2GarageOpenerVideo/tree/master/home/pi/PirFrontDoor
+frontdoor.py
+launcher.sh
 $ sudo apt-get install python-pip
 $ chmod +x frontdoor.py
 $ chmod 755 launcher.sh
